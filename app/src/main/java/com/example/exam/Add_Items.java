@@ -29,8 +29,9 @@ public class Add_Items extends AppCompatActivity {
 
         btn_save = findViewById(R.id.btn_save);
 
-        //Firebase get instance pasikeistite į savo
+
         mDatabase = FirebaseDatabase.getInstance("https://exam-40237-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
+
 
         btn_save.setOnClickListener(view -> {
 
@@ -70,6 +71,7 @@ public class Add_Items extends AppCompatActivity {
     public void writeNewCar( String Mark, String Model) {
         Car car = new Car(Mark, Model);
 
-        mDatabase.child("Car").child("1").setValue(car);
+        mDatabase.child("Car").push().setValue(car);
+
     }
 }
