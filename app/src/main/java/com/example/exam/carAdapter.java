@@ -60,13 +60,13 @@ public class carAdapter extends RecyclerView.Adapter<carAdapter.MyViewHolder>{
 
             ctx.startActivity(edit);
 
-//            ctx.startActivity(new Intent(ctx.getApplicationContext(), Edit_Items.class));
-//            DatabaseReference ref = mDatabase.child(Uid.get(position)).child("Mark");
-//            ref.setValue("Volvo");
         });
         holder.btn_delete.setOnClickListener(view -> {
             DatabaseReference ref = mDatabase.child(Uid.get(position));
             ref.removeValue();
+
+            ctx.startActivity(new Intent(ctx.getApplicationContext(),MainActivity.class));
+
         });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
