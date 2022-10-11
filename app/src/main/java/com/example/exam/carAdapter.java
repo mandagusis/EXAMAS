@@ -2,6 +2,8 @@ package com.example.exam;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,8 +48,21 @@ public class carAdapter extends RecyclerView.Adapter<carAdapter.MyViewHolder>{
         holder.Mark.setText(Mark.get(position));
         holder.Model.setText(Model.get(position));
         holder.btn_update.setOnClickListener(view -> {
-            DatabaseReference ref = mDatabase.child(Uid.get(position)).child("Mark");
-            ref.setValue("Volvo");
+
+            Intent edit = new Intent(ctx.getApplicationContext(), Edit_Items.class);
+
+            Bundle bundle = new Bundle();
+
+            bundle.putString("Uid", Uid.get(position));
+            bundle.putString("Mark", Mark.get(position));
+            bundle.putString("Model", Model.get(position));
+            edit.putExtras(bundle);
+
+            ctx.startActivity(edit);
+
+//            ctx.startActivity(new Intent(ctx.getApplicationContext(), Edit_Items.class));
+//            DatabaseReference ref = mDatabase.child(Uid.get(position)).child("Mark");
+//            ref.setValue("Volvo");
         });
         holder.btn_delete.setOnClickListener(view -> {
             DatabaseReference ref = mDatabase.child(Uid.get(position));

@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Exam"
         tools:targetApi="31">
         <activity
+            android:name=".Edit_Items"
+            android:exported="false" />
+        <activity
             android:name=".Add_Items"
             android:exported="false" />
         <activity

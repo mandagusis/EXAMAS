@@ -64,9 +64,10 @@ public class MainActivity extends AppCompatActivity {
                     uidText.add(dataSnapshot1.getKey());
 
 
-                    carAdapter car_Adapter = new carAdapter( markText, modelText, uidText,MainActivity.this, mDatabase);
-                    recyclerView.setAdapter(car_Adapter);
+
                 }
+                carAdapter car_Adapter = new carAdapter( markText, modelText, uidText,MainActivity.this, mDatabase);
+                recyclerView.setAdapter(car_Adapter);
             }
 
             @Override
