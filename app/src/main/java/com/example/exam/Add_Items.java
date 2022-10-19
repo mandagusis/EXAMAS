@@ -13,7 +13,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
 
 public class Add_Items extends AppCompatActivity {
 
-    EditText mText_Mark, mText_Model;
+    EditText mText_Name, mText_Course;
 
     Button btn_save;
 
@@ -24,21 +24,21 @@ public class Add_Items extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_items);
 
-        mText_Mark = findViewById(R.id.text_Mark);
-        mText_Model = findViewById(R.id.text_Model);
+        mText_Name = findViewById(R.id.text_Name);
+        mText_Course = findViewById(R.id.text_Course);
 
         btn_save = findViewById(R.id.btn_save);
 
 
-        mDatabase = FirebaseDatabase.getInstance("https://exam-40237-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
+        mDatabase = FirebaseDatabase.getInstance("https://stuff-a6bee-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
 
 
         btn_save.setOnClickListener(view -> {
 
-            String text_Mark = mText_Mark.getText().toString().trim();
-            String text_Model = mText_Model.getText().toString().trim();
+            String text_Name = mText_Name.getText().toString().trim();
+            String text_Course = mText_Course.getText().toString().trim();
 
-            writeNewCar(text_Mark, text_Model);
+            writeNewStudent(text_Name, text_Course);
 
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
@@ -52,26 +52,26 @@ public class Add_Items extends AppCompatActivity {
     }
 
     @IgnoreExtraProperties
-    public class Car {
+    public class Student {
 
-        public String Mark;
-        public String Model;
+        public String Name;
+        public String Course;
 
-        public Car() {
+        public Student() {
             // Default constructor required for calls to DataSnapshot.getValue(User.class)
         }
 
-        public Car(String Mark, String Model) {
-            this.Mark = Mark;
-            this.Model = Model;
+        public Student(String Name, String Course) {
+            this.Name = Name;
+            this.Course = Course;
         }
 
     }
 
-    public void writeNewCar( String Mark, String Model) {
-        Car car = new Car(Mark, Model);
+    public void writeNewStudent( String Name, String Course) {
+        Student student = new Student(Name, Course);
 
-        mDatabase.child("Car").push().setValue(car);
+        mDatabase.child("Student").push().setValue(student);
 
     }
 }

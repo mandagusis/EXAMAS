@@ -10,7 +10,7 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit Car"
+        android:text="Edit Student info"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,12 +20,12 @@
         app:layout_constraintVertical_bias="0.117" />
 
     <EditText
-        android:id="@+id/edit_Mark"
+        android:id="@+id/edit_Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="92dp"
         android:ems="10"
-        android:hint="Mark"
+        android:hint="Student name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -33,17 +33,17 @@
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <EditText
-        android:id="@+id/edit_Model"
+        android:id="@+id/edit_Course"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:ems="10"
-        android:hint="Model"
+        android:hint="Student course"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_Mark" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_Name" />
 
     <Button
         android:id="@+id/btn_edit"
@@ -54,5 +54,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_Model" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_Course" />
 </androidx.constraintlayout.widget.ConstraintLayout>

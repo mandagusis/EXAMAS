@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,26 +18,21 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.IgnoreExtraProperties;
 import com.google.firebase.database.ValueEventListener;
 
-import org.json.JSONException;
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class MainActivity extends AppCompatActivity {
 
     Button btn_logout, btn_addItem;
 
-    TextView search_Mark;
+    TextView search_Course;
 
     RecyclerView recyclerView;
 
-    ArrayList<String> modelText = new ArrayList<>();
-    ArrayList<String> markText = new ArrayList<>();
+    ArrayList<String> nameText = new ArrayList<>();
+    ArrayList<String> courseText = new ArrayList<>();
     ArrayList<String> uidText = new ArrayList<>();
 
     private String searchText;
@@ -56,34 +49,34 @@ public class MainActivity extends AppCompatActivity {
         btn_logout = findViewById(R.id.btn_logout);
         btn_addItem = findViewById(R.id.btn_addItem);
 
-        search_Mark =findViewById(R.id.search_Mark);
+        search_Course =findViewById(R.id.search_Course);
 
         recyclerView = findViewById(R.id.items_view);
 
-        mDatabase = FirebaseDatabase.getInstance("https://exam-40237-default-rtdb.europe-west1.firebasedatabase.app").getReference("Car");
+        mDatabase = FirebaseDatabase.getInstance("https://stuff-a6bee-default-rtdb.europe-west1.firebasedatabase.app/").getReference("Student");
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        ValueEventListener carListener = new ValueEventListener() {
+        ValueEventListener studentListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                snapshot_edit = snapshot;
+               // snapshot_edit = snapshot;
                 for(DataSnapshot dataSnapshot1:snapshot.getChildren())
                 {
-                    if (searchText == null || searchText.isEmpty()) {
-                        markText.add(dataSnapshot1.child("Mark").getValue().toString());
-                        modelText.add(dataSnapshot1.child("Model").getValue().toString());
+                  //  if (searchText == null || searchText.isEmpty()) {
+                        nameText.add(dataSnapshot1.child("Name").getValue().toString());
+                        courseText.add(dataSnapshot1.child("Course").getValue().toString());
                         uidText.add(dataSnapshot1.getKey());
-                    }else if (dataSnapshot1.child("Mark").getValue().toString().contains(searchText)) {
-                        markText.add(dataSnapshot1.child("Mark").getValue().toString());
-                        modelText.add(dataSnapshot1.child("Model").getValue().toString());
-                        uidText.add(dataSnapshot1.getKey());
-                    }
+                   // }else if (dataSnapshot1.child("Mark").getValue().toString().contains(searchText)) {
+                    //    markText.add(dataSnapshot1.child("Mark").getValue().toString());
+                   //     modelText.add(dataSnapshot1.child("Model").getValue().toString());
+                   //     uidText.add(dataSnapshot1.getKey());
+                  //  }
 
                 }
-                carAdapter car_Adapter = new carAdapter( markText, modelText, uidText,MainActivity.this, mDatabase);
-                recyclerView.setAdapter(car_Adapter);
+                studentAdapter student_Adapter = new studentAdapter( nameText, courseText, uidText,MainActivity.this, mDatabase);
+                recyclerView.setAdapter(student_Adapter);
 
             }
 
@@ -97,10 +90,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        mDatabase.addValueEventListener(carListener);
+        mDatabase.addValueEventListener(studentListener);
 
 
-        search_Mark.addTextChangedListener(new TextWatcher() {
+        /*search_Mark.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -113,11 +106,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                searchText = search_Mark.getText().toString();
-                markText.clear();
-                carListener.onDataChange(snapshot_edit);
+               // searchText = search_Mark.getText().toString();
+             //   markText.clear();
+             //   carListener.onDataChange(snapshot_edit);
             }
-        });
+        });*/
 
         btn_addItem.setOnClickListener(view -> {
             startActivity(new Intent(getApplicationContext(), Add_Items.class));

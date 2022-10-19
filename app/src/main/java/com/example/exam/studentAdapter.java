@@ -16,18 +16,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DatabaseReference;
 
+import java.text.BreakIterator;
 import java.util.ArrayList;
 
-public class carAdapter extends RecyclerView.Adapter<carAdapter.MyViewHolder>{
-    ArrayList<String> Mark;
-    ArrayList<String> Model;
+public class studentAdapter extends RecyclerView.Adapter<studentAdapter.MyViewHolder>{
+    ArrayList<String> Name;
+    ArrayList<String> Course;
     ArrayList<String> Uid;
     DatabaseReference mDatabase;
     Context ctx;
 
-    public carAdapter(ArrayList<String> Mark, ArrayList<String> Model, ArrayList<String> Uid, Context ctx, DatabaseReference mDatabase) {
-        this.Mark = Mark;
-        this.Model = Model;
+    public studentAdapter(ArrayList<String> Name, ArrayList<String> Course, ArrayList<String> Uid, Context ctx, DatabaseReference mDatabase) {
+        this.Name = Name;
+        this.Course = Course;
         this.Uid = Uid;
         this.ctx = ctx;
         this.mDatabase = mDatabase;
@@ -45,8 +46,8 @@ public class carAdapter extends RecyclerView.Adapter<carAdapter.MyViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        holder.Mark.setText(Mark.get(position));
-        holder.Model.setText(Model.get(position));
+        holder.Name.setText(Name.get(position));
+        holder.Course.setText(Course.get(position));
         holder.btn_update.setOnClickListener(view -> {
 
             Intent edit = new Intent(ctx.getApplicationContext(), Edit_Items.class);
@@ -54,8 +55,8 @@ public class carAdapter extends RecyclerView.Adapter<carAdapter.MyViewHolder>{
             Bundle bundle = new Bundle();
 
             bundle.putString("Uid", Uid.get(position));
-            bundle.putString("Mark", Mark.get(position));
-            bundle.putString("Model", Model.get(position));
+            bundle.putString("Name", Name.get(position));
+            bundle.putString("Course", Course.get(position));
             edit.putExtras(bundle);
 
             ctx.startActivity(edit);
@@ -72,27 +73,27 @@ public class carAdapter extends RecyclerView.Adapter<carAdapter.MyViewHolder>{
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ctx, Mark.get(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx, Name.get(position), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return Mark.size();
+        return Name.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView Mark, Model;
+        TextView Name, Course;
         Button btn_update, btn_delete;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
 
-            Mark = itemView.findViewById(R.id.Mark);
-            Model = itemView.findViewById(R.id.Model);
+            Name = itemView.findViewById(R.id.Name);
+            Course = itemView.findViewById(R.id.Course);
             btn_update = itemView.findViewById(R.id.btn_update);
             btn_delete = itemView.findViewById(R.id.btn_delete);
 

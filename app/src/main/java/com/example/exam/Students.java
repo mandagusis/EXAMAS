@@ -1,7 +1,5 @@
 package com.example.exam;
 
-import android.view.Display;
-
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
@@ -9,27 +7,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 @IgnoreExtraProperties
-public class Car {
-        public String Mark;
-        public String Model;
+public class Students {
+        public String Name;
+        public String Course;
         public String Uid;
         public Map<String, Boolean> stars = new HashMap<>();
 
-        public Car() {
+        public Students() {
             // Default constructor required for calls to DataSnapshot.getValue(User.class)
         }
 
-        public Car(String Mark, String Model, String Uid) {
+        public Students(String Name, String Course, String Uid) {
             this.Uid = Uid;
-            this.Mark = Mark;
-            this.Model = Model;
+            this.Name = Name;
+            this.Course = Course;
         }
 
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("Mark", Mark);
-        result.put("Model", Model);
+        result.put("Name", Name);
+        result.put("Course", Course);
         result.put("stars", stars);
 
         return result;
