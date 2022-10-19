@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
@@ -61,18 +63,18 @@ public class MainActivity extends AppCompatActivity {
         ValueEventListener studentListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-               // snapshot_edit = snapshot;
+               snapshot_edit = snapshot;
                 for(DataSnapshot dataSnapshot1:snapshot.getChildren())
                 {
-                  //  if (searchText == null || searchText.isEmpty()) {
+                    if (searchText == null || searchText.isEmpty()) {
                         nameText.add(dataSnapshot1.child("Name").getValue().toString());
                         courseText.add(dataSnapshot1.child("Course").getValue().toString());
                         uidText.add(dataSnapshot1.getKey());
-                   // }else if (dataSnapshot1.child("Mark").getValue().toString().contains(searchText)) {
-                    //    markText.add(dataSnapshot1.child("Mark").getValue().toString());
-                   //     modelText.add(dataSnapshot1.child("Model").getValue().toString());
-                   //     uidText.add(dataSnapshot1.getKey());
-                  //  }
+                    }else if (dataSnapshot1.child("Course").getValue().toString().contains(searchText)) {
+                            nameText.add(dataSnapshot1.child("Name").getValue().toString());
+                            courseText.add(dataSnapshot1.child("Course").getValue().toString());
+                            uidText.add(dataSnapshot1.getKey());
+                    }
 
                 }
                 studentAdapter student_Adapter = new studentAdapter( nameText, courseText, uidText,MainActivity.this, mDatabase);
@@ -93,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         mDatabase.addValueEventListener(studentListener);
 
 
-        /*search_Mark.addTextChangedListener(new TextWatcher() {
+        search_Course.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -106,11 +108,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-               // searchText = search_Mark.getText().toString();
-             //   markText.clear();
-             //   carListener.onDataChange(snapshot_edit);
+                searchText = search_Course.getText().toString();
+                courseText.clear();
+                studentListener.onDataChange(snapshot_edit);
             }
-        });*/
+        });
 
         btn_addItem.setOnClickListener(view -> {
             startActivity(new Intent(getApplicationContext(), Add_Items.class));

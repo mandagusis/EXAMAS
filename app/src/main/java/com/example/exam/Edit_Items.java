@@ -42,11 +42,11 @@ public class Edit_Items extends AppCompatActivity {
         btn_edit.setOnClickListener(view -> {
             DatabaseReference ref = mDatabase.child(Uid);
 
-            String edit_Mark = mEdit_Name.getText().toString();
-            String edit_Model = mEdit_Course.getText().toString();
+            String edit_Name = mEdit_Name.getText().toString();
+            String edit_Course = mEdit_Course.getText().toString();
 
-            ref.child("Mark").setValue(edit_Mark);
-            ref.child("Model").setValue(edit_Model);
+            ref.child("Name").setValue(edit_Name);
+            ref.child("Course").setValue(edit_Course);
 
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
